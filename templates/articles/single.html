@@ -10,17 +10,23 @@
 
 {% block body %}
 
-<article class="article">
+<article class="article" itemscope itemtype="https://schema.org/Article">
   <header class="header">
-    <time class="date" datetime="{{ article.created_at.isoformat }}">{{ article.created_at }}</time>
-    <h2 class="title">{{ article.title }}</h2>
+    <time class="date" datetime="{{ article.created_at.isoformat }}" itemprop="datePublished">
+      {{ article.created_at }}
+    </time>
+    <h2 class="title" itemprop="headline">{{ article.title }}</h2>
   </header>
+
   {% if article.image %}
-    <figure class="thumbnail">
-      <img class="image" src="{{ article.image.url }}" alt="{{ article.title }}">
+    <figure class="thumbnail" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+      <img class="image" width="{{ article.image.width }}" height="{{ article.image.height }}" src="{{ article.image.url }}" alt="{{ article.title }}" itemprop="url">
+      <meta itemprop="width" content="{{ article.image.width }}">
+      <meta itemprop="height" content="{{ article.image.height }}">
     </figure>
   {% endif %}
-  <div class="content">{{ article.content|safe }}</div>
+
+  <div class="content" itemprop="articleBody">{{ article.content|safe }}</div>
 </article>
 
 <aside class="prev-next">
