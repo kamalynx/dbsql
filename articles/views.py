@@ -1,6 +1,15 @@
 from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import last_modified
 
 from articles import models
+
+
+def get_article_modified_date(request, **kwargs):
+    entry = models.Article.objects.values('updated_at').get(
+        slug=kwargs['slug']
+    )
+    return entry['updated_at']
 
 
 class Articles(ListView):
@@ -15,6 +24,7 @@ class Articles(ListView):
         return super().get_queryset()
 
 
+@method_decorator(last_modified(get_article_modified_date), name='dispatch')
 class Article(DetailView):
     model = models.Article
     queryset = models.Article.published.all()
