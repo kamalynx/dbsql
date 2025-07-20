@@ -142,3 +142,47 @@ DJANGORESIZED_DEFAULT_SIZE = 960, 720
 DJANGORESIZED_DEFAULT_QUALITY = 100
 DJANGORESIZED_DEFAULT_KEEP_META = False
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis:///run/redis/redis-server.sock',
+    },
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+CSRF_USE_SESSIONS = True
+
+DISALLOWED_USER_AGENTS = (
+    re.compile(r'curl/[\d.]+', re.IGNORECASE),
+    re.compile(r'go-http-client/[\d.]+', re.IGNORECASE),
+    re.compile(r'python-requests/[\d.]+', re.IGNORECASE),
+    re.compile(r'axios/[\d.]+', re.IGNORECASE),
+    re.compile(r'Wget/[\d.]+', re.IGNORECASE),
+    re.compile(r'CMS-Checker/[\d.]+', re.IGNORECASE),
+    re.compile(r'WhatCMS/[\d.]+', re.IGNORECASE),
+    re.compile(r'2ip bot/[\d.]+', re.IGNORECASE),
+    re.compile(r'BackupLand/[\d.]+', re.IGNORECASE),
+    re.compile(r'HeadlessChrome/[\d.]+', re.IGNORECASE),
+    re.compile(r'zgrab/[\d.]+', re.IGNORECASE),
+    re.compile(r'Keydrop.io/[\d.]+', re.IGNORECASE),
+    re.compile(r'CensysInspect/[\d.]+', re.IGNORECASE),
+    re.compile(r'nvdorz'),
+    re.compile(r'aiohttp/[\d.]+', re.IGNORECASE),
+    re.compile(r'python-httpx/[\d.]+', re.IGNORECASE),
+    re.compile(r'SiteCheckerBotCrawler/[\d.]+', re.IGNORECASE),
+)
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
+    },
+}
