@@ -13,7 +13,7 @@ Group=dbsql
 # this user can be transiently created by systemd
 # DynamicUser=true
 RuntimeDirectory=dbsql
-WorkingDirectory=/var/www/dbsql/dbsql
+WorkingDirectory=/var/www/dbsql/dbsql/dbsql
 ExecStart=/home/dbsql/.local/bin/uv run gunicorn core.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
