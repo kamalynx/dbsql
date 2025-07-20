@@ -26,13 +26,13 @@
 <aside class="prev-next">
   {% with prev=article.get_previous_by_created_at %}
     {% if prev %}
-      <div class="prev">&larr; &laquo;<a title="предыдущая" href="{{ prev.get_absolute_url }}">{{ prev.name }}</a>&raquo;</div>
+      <div class="prev">&larr; &laquo;<a title="предыдущая" href="{{ prev.get_absolute_url }}">{{ prev.title }}</a>&raquo;</div>
     {% endif %}
   {% endwith %}
 
   {% with next=project.get_next_by_created_at %}
     {% if next %}
-      <div class="next">&laquo;<a title="следующая" href="{{ next.get_absolute_url }}">{{ next.name }}</a>&raquo; &rarr;</div>
+      <div class="next">&laquo;<a title="следующая" href="{{ next.get_absolute_url }}">{{ next.title }}</a>&raquo; &rarr;</div>
     {% endif %}
   {% endwith %}
 </aside>
