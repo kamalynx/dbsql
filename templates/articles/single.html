@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ article.title }}{% endblock %}
 
@@ -6,6 +7,7 @@
   {% if article.description %}
   <meta name="description" content="{{ article.description }}">
   {% endif %}
+  <link rel="stylesheet" href="{% static 'foundation.min.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -42,4 +44,9 @@
     {% endif %}
   {% endwith %}
 </aside>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'highlight.min.js' %}"></script>
+<script>hljs.highlightAll();</script>
 {% endblock %}
