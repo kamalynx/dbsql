@@ -1,0 +1,100 @@
+black-color = #333
+white-color = #fefefe
+link-color = #36c
+link-hover-color = #f03
+link-visited-color = #663399
+global-border = 1px solid #ddd
+global-radius = 5px
+global-max-width = 1920px
+
+
+*
+*::before
+*::after
+  box-sizing inherit
+
+html
+  box-sizing border-box
+  font 100%/1.5 sans-serif
+
+body
+  color black-color
+  padding 0
+  margin 0 auto
+  max-width 60rem
+  background-color white-color
+
+a
+  color link-color
+
+  &:hover
+    color link-hover-color
+
+img
+  max-width 100%
+  height auto
+
+h1, h2, h3, h4, h5, h6
+  line-height 1.3
+
+
+pre
+  overflow auto
+
+  code
+    padding 0
+
+code
+  background-color whitesmoke
+  padding 3px 5px
+
+.site-header
+  padding 1rem
+  margin-bottom 1rem
+
+  .title
+    margin 0
+    font-size 1.6rem
+
+    a
+      color black-color
+      text-decoration none
+
+      &:hover
+        color link-hover-color
+
+
+.site-body
+  padding 1rem
+  margin-bottom 1rem
+
+
+.article
+  margin-bottom 3rem
+
+  h2, h3, h4, h5, h6
+    margin 2rem 0 1rem
+
+  .header
+    margin-bottom 2rem
+  
+  .thumbnail
+    margin 0
+    padding 0
+    width 100%
+
+  .date
+    font-size smaller
+
+  .title
+    margin 0 0 1rem 0
+
+    a
+      color black-color
+      text-decoration none
+
+      &:hover, &:active
+        color link-hover-color
+
+
+

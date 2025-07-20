@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ request.site.name }}{% endblock %}
+
+{% block body %}
+
+{% for article in articles %}
+  <article class="article">
+    <header class="header">
+      <time class="date" datetime="{{ article.created_at.isoformat }}">{{ article.created_at }}</time>
+      <h2 class="title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+    </header>
+    {% if article.image %}
+      <figure class="thumbnail">
+        <img class="image" src="{{ article.image.url }}" alt="{{ article.title }}">
+      </figure>
+    {% endif %}
+    <div class="content">{{ article.description }}</div>
+  </article>
+{% endfor %}
+
+{% endblock %}
