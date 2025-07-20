@@ -13,6 +13,8 @@ if not PUBLIC_PATH.exists():
 
 env = environ.Env(
     DEBUG=(bool, False),
+    TELEGRAM_BOT_TOKEN=(str, None),
+    TELEGRAM_CHAT_ID=(str, None),
 )
 env.read_env(BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
@@ -222,3 +224,6 @@ LOGGING = {
         },
     },
 }
+
+TELEGRAM_BOT_TOKEN = env('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = env('TELEGRAM_CHAT_ID')
