@@ -1,5 +1,5 @@
 [Unit]
-Description=djangosites gunicorn daemon
+Description=dbsql gunicorn daemon
 Requires=gunicorn.socket
 After=network.target
 
@@ -8,13 +8,13 @@ After=network.target
 Type=notify
 NotifyAccess=all
 # the specific user that our service will run as
-User=web
-Group=web
+User=dbsql
+Group=dbsql
 # this user can be transiently created by systemd
 # DynamicUser=true
-RuntimeDirectory=djangosites
-WorkingDirectory=/var/www/djangosites
-ExecStart=/home/web/.local/bin/uv run gunicorn core.wsgi
+RuntimeDirectory=dbsql
+WorkingDirectory=/home/dbsql/dbsql
+ExecStart=/home/dbsql/.local/bin/uv run gunicorn core.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
