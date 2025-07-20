@@ -8,13 +8,13 @@ After=network.target
 Type=notify
 NotifyAccess=all
 # the specific user that our service will run as
-User=dbsql
-Group=dbsql
+User=dbsql_ru
+Group=dbsql_ru
 # this user can be transiently created by systemd
 # DynamicUser=true
 RuntimeDirectory=dbsql
-WorkingDirectory=/var/www/dbsql/dbsql/dbsql
-ExecStart=/home/dbsql/.local/bin/uv run gunicorn core.wsgi
+WorkingDirectory=/var/www/dbsql_ru/dbsql/
+ExecStart=/home/dbsql_ru/.local/bin/uv run gunicorn core.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
