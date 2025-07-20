@@ -13,7 +13,7 @@
 <article class="article">
   <header class="header">
     <time class="date" datetime="{{ article.created_at.isoformat }}">{{ article.created_at }}</time>
-    <h2 class="title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+    <h2 class="title">{{ article.title }}</h2>
   </header>
   {% if article.image %}
     <figure class="thumbnail">
@@ -22,4 +22,18 @@
   {% endif %}
   <div class="content">{{ article.content|safe }}</div>
 </article>
+
+<aside class="prev-next">
+  {% with prev=article.get_previous_by_created_at %}
+    {% if prev %}
+      <div class="prev">&larr; &laquo;<a title="предыдущая" href="{{ prev.get_absolute_url }}">{{ prev.name }}</a>&raquo;</div>
+    {% endif %}
+  {% endwith %}
+
+  {% with next=project.get_next_by_created_at %}
+    {% if next %}
+      <div class="next">&laquo;<a title="следующая" href="{{ next.get_absolute_url }}">{{ next.name }}</a>&raquo; &rarr;</div>
+    {% endif %}
+  {% endwith %}
+</aside>
 {% endblock %}
