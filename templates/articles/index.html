@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ request.site.name }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block head %}
+  <link rel="canonical" href="{{ canonical }}">
+{% endblock %}
 
 {% block body %}
-
 {% for article in articles %}
 
   <article class="article" itemscope itemtype="https://schema.org/Article">
@@ -30,5 +33,16 @@
   </p>
 </article>
 {% endfor %}
+
+
+<aside class="prev-next">
+  {% if page_obj.has_previous %}
+    <div class="prev">&larr; &laquo;<a title="предыдущая" href="{% if page_obj.previous_page_number == 1 %}{% url 'articles:articles' %}{% else %}{% url 'articles:pages' page=page_obj.previous_page_number %}{% endif %}">предыдущая</a>&raquo;</div>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+    <div class="next">&laquo;<a title="следующая" href="{% url 'articles:pages' page_obj.next_page_number %}">следующая</a>&raquo; &rarr;</div>
+  {% endif %}
+</aside>
 
 {% endblock %}
