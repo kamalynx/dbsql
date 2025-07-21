@@ -25,12 +25,12 @@
   {% endif %}
 
   <div class="content" itemprop="description">{{ article.description }}</div>
-
-  <p>
+  <footer class="footer">
     <time class="date" datetime="{{ article.created_at.isoformat }}" itemprop="datePublished">
       {{ article.created_at }}
     </time>
-  </p>
+    <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a>
+  </footer>
 </article>
 {% endfor %}
 

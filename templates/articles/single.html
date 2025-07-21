@@ -30,6 +30,9 @@
   {% endif %}
 
   <div class="content" itemprop="articleBody">{{ article.content|safe }}</div>
+  <footer class="footer">
+    <div>Рубрика: <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></div>
+  </footer>
 </article>
 
 <aside class="prev-next">
