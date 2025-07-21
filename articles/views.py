@@ -2,7 +2,9 @@ from django.views.generic import ListView, DetailView
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import last_modified
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.db.models import Count
 
 from articles import models
 
@@ -59,12 +61,20 @@ class Article(DetailView):
 
 class Category(DetailView):
     model = models.Category
-    # ~ queryset = models.Category
     template_name = 'articles/category.html'
     context_object_name = 'category'
+
+    def get_queryset(self):
+        return super().get_queryset().annotate(
+            articles_count=Count('articles')
+        ).filter(articles_count__gt=0)
+
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, slug=self.kwargs['slug'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articles'] = self.object.articles.filter(is_published=True)
         return context
-
