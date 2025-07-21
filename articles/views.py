@@ -39,7 +39,7 @@ class Articles(ListView):
         return context
 
 
-@method_decorator(last_modified(get_article_modified_date), name='dispatch')
+# ~ @method_decorator(last_modified(get_article_modified_date), name='dispatch')
 class Article(DetailView):
     model = models.Article
     queryset = models.Article.published.all()
