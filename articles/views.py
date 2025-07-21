@@ -51,6 +51,11 @@ class Article(DetailView):
             return models.Article.published
         return super().get_queryset()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['canonical'] = self.request.build_absolute_uri(self.get_object().get_absolute_url())
+        return context
+
 
 class Category(DetailView):
     model = models.Category
