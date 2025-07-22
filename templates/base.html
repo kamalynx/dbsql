@@ -8,7 +8,11 @@
     {% block head %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar"></nav>
+    <nav class="navbar">
+      <a href="/mariadb/">MariaDB</a>
+      <a href="/postgresql/">PostgreSQL</a>
+      <a href="/basics/">Основы</a>
+    </nav>
     <header class="site-header">
       <h1 class="title"><a href="{% url 'articles:articles' %}">{{ request.site.name }}</a></h1>
     </header>

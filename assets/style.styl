@@ -94,14 +94,15 @@ table
     padding 0
     width 100%
 
-  /*.date
-    font-size smaller*/
+  .date
+    font-size smaller
 
   .title
     margin 0 0 1rem 0
 
     a
-      color black-color
+      color steelblue
+      font-weight normal
       text-decoration none
 
       &:hover, &:active
@@ -121,3 +122,17 @@ table
 
   .next
     text-align right
+
+
+.navbar
+  display flex
+  gap 1rem
+  padding 1rem
+
+  a
+    text-decoration none
+    font-weight bold
+    color steelblue
+
+    &:hover
+      color link-hover-color
