@@ -13,7 +13,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("panel/", admin.site.urls),
     path(
         'sitemap.xml',
         sitemap,
