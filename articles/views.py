@@ -64,5 +64,5 @@ class Category(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = self.object.articles
+        context['articles'] = self.object.articles.all()
         return context
