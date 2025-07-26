@@ -12,7 +12,7 @@ from articles.bot import send_message_to_tg_channel
 def send_tg_message(sender, instance, created, **kwargs):
     token = settings.TELEGRAM_BOT_TOKEN
     chat_id = settings.TELEGRAM_CHAT_ID
-    if all([created, token, chat_id, instance.is_published]):
+    if all([created, token, chat_id]):
         site = Site.objects.get_current().domain
         message = render_to_string(
             'tg_message.html', context={'article': instance, 'site': site}

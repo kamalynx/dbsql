@@ -18,15 +18,9 @@ def get_article_modified_date(request, **kwargs):
 
 class Articles(ListView):
     model = models.Article
-    queryset = models.Article.published.all()
     template_name = 'articles/index.html'
     context_object_name = 'articles'
     paginate_by = getattr(settings, 'PAGINATE_BY', 2)
-
-    def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return models.Article.published.all()
-        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,14 +38,8 @@ class Articles(ListView):
 # ~ @method_decorator(last_modified(get_article_modified_date), name='dispatch')
 class Article(DetailView):
     model = models.Article
-    queryset = models.Article.published.all()
     template_name = 'articles/single.html'
     context_object_name = 'article'
-
-    def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return models.Article.published
-        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -76,5 +64,5 @@ class Category(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = self.object.articles.filter(is_published=True)
+        context['articles'] = self.object.articles
         return context

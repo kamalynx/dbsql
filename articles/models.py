@@ -20,13 +20,6 @@ def category_image_path(instance, filename):
     return f'categories/{instance.slug}/{name}'
 
 
-class PublishedManager(models.Manager):
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.prefetch_related('category').filter(is_published=True)
-
-
 class Category(models.Model):
     title = models.CharField('заголовок', max_length=128)
     description = models.CharField('описание', max_length=512, blank=True)
@@ -50,13 +43,9 @@ class Article(models.Model):
     description = models.CharField('описание', max_length=512, blank=True)
     content = models.TextField('содержимое')
     image = ResizedImageField('изображение', upload_to=article_image_path, blank=True)
-    is_published = models.BooleanField('опубликовано?', default=False)
     created_at = models.DateTimeField("дата создания", auto_now_add=True)
     updated_at = models.DateTimeField("дата обновления", auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='категория', related_name='articles')
-
-    objects = models.Manager()
-    published = PublishedManager()
 
     class Meta:
         verbose_name = "статья"

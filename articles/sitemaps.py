@@ -5,7 +5,7 @@ from articles.models import Article
 
 class ArticlesSitemap(Sitemap):
     def items(self):
-        return Article.published.all()
+        return Article.objects.all()
 
     def lastmod(self, obj):
         return obj.updated_at
