@@ -24,11 +24,16 @@ class Category(models.Model):
     title = models.CharField('заголовок', max_length=128)
     description = models.CharField('описание', max_length=512, blank=True)
     slug = models.SlugField('URI', max_length=80, unique=True)
-    image = ResizedImageField('изображение', size=(320, 240), upload_to=category_image_path, blank=True)
+    image = ResizedImageField(
+        'изображение',
+        size=(320, 240),
+        upload_to=category_image_path,
+        blank=True,
+    )
 
     class Meta:
-        verbose_name = "категория"
-        verbose_name_plural = "категории"
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
     def __str__(self):
         return self.title
@@ -42,14 +47,21 @@ class Article(models.Model):
     slug = models.SlugField('URI', max_length=80, unique=True)
     description = models.CharField('описание', max_length=512, blank=True)
     content = models.TextField('содержимое')
-    image = ResizedImageField('изображение', upload_to=article_image_path, blank=True)
-    created_at = models.DateTimeField("дата создания", auto_now_add=True)
-    updated_at = models.DateTimeField("дата обновления", auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='категория', related_name='articles')
+    image = ResizedImageField(
+        'изображение', upload_to=article_image_path, blank=True
+    )
+    created_at = models.DateTimeField('дата создания', auto_now_add=True)
+    updated_at = models.DateTimeField('дата обновления', auto_now_add=True)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        verbose_name='категория',
+        related_name='articles',
+    )
 
     class Meta:
-        verbose_name = "статья"
-        verbose_name_plural = "статьи"
+        verbose_name = 'статья'
+        verbose_name_plural = 'статьи'
         ordering = ('-created_at', '-updated_at')
         get_latest_by = ('-updated_at', '-created_at')
 
@@ -57,7 +69,10 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse_lazy('articles:article', kwargs={'category': self.category.slug, 'slug': self.slug})
+        return reverse_lazy(
+            'articles:article',
+            kwargs={'category': self.category.slug, 'slug': self.slug},
+        )
 
     def delete(self, **kwargs):
         if self.image:
@@ -69,4 +84,3 @@ class Article(models.Model):
                 shutil.rmtree(path.parent)
 
         super().delete(**kwargs)
-

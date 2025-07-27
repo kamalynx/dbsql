@@ -7,124 +7,135 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name="Category",
+            name='Category',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("title", models.CharField(max_length=128, verbose_name="заголовок")),
                 (
-                    "description",
+                    'title',
+                    models.CharField(max_length=128, verbose_name='заголовок'),
+                ),
+                (
+                    'description',
                     models.CharField(
-                        blank=True, max_length=512, verbose_name="описание"
+                        blank=True, max_length=512, verbose_name='описание'
                     ),
                 ),
                 (
-                    "slug",
-                    models.SlugField(max_length=80, unique=True, verbose_name="URI"),
+                    'slug',
+                    models.SlugField(
+                        max_length=80, unique=True, verbose_name='URI'
+                    ),
                 ),
                 (
-                    "image",
+                    'image',
                     django_resized.forms.ResizedImageField(
                         blank=True,
                         crop=None,
-                        force_format="WEBP",
+                        force_format='WEBP',
                         keep_meta=False,
                         quality=100,
                         scale=None,
                         size=(320, 240),
                         upload_to=articles.models.category_image_path,
-                        verbose_name="изображение",
+                        verbose_name='изображение',
                     ),
                 ),
             ],
             options={
-                "verbose_name": "категория",
-                "verbose_name_plural": "категории",
+                'verbose_name': 'категория',
+                'verbose_name_plural': 'категории',
             },
         ),
         migrations.CreateModel(
-            name="Article",
+            name='Article',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("title", models.CharField(max_length=128, verbose_name="заголовок")),
                 (
-                    "slug",
-                    models.SlugField(max_length=80, unique=True, verbose_name="URI"),
+                    'title',
+                    models.CharField(max_length=128, verbose_name='заголовок'),
                 ),
                 (
-                    "description",
+                    'slug',
+                    models.SlugField(
+                        max_length=80, unique=True, verbose_name='URI'
+                    ),
+                ),
+                (
+                    'description',
                     models.CharField(
-                        blank=True, max_length=512, verbose_name="описание"
+                        blank=True, max_length=512, verbose_name='описание'
                     ),
                 ),
-                ("content", models.TextField(verbose_name="содержимое")),
+                ('content', models.TextField(verbose_name='содержимое')),
                 (
-                    "image",
+                    'image',
                     django_resized.forms.ResizedImageField(
                         blank=True,
                         crop=None,
-                        force_format="WEBP",
+                        force_format='WEBP',
                         keep_meta=False,
                         quality=100,
                         scale=None,
                         size=(960, 720),
                         upload_to=articles.models.article_image_path,
-                        verbose_name="изображение",
+                        verbose_name='изображение',
                     ),
                 ),
                 (
-                    "is_published",
-                    models.BooleanField(default=False, verbose_name="опубликовано?"),
+                    'is_published',
+                    models.BooleanField(
+                        default=False, verbose_name='опубликовано?'
+                    ),
                 ),
                 (
-                    "created_at",
+                    'created_at',
                     models.DateTimeField(
-                        auto_now_add=True, verbose_name="дата создания"
+                        auto_now_add=True, verbose_name='дата создания'
                     ),
                 ),
                 (
-                    "updated_at",
+                    'updated_at',
                     models.DateTimeField(
-                        auto_now_add=True, verbose_name="дата обновления"
+                        auto_now_add=True, verbose_name='дата обновления'
                     ),
                 ),
                 (
-                    "category",
+                    'category',
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        related_name="articles",
-                        to="articles.category",
-                        verbose_name="категория",
+                        related_name='articles',
+                        to='articles.category',
+                        verbose_name='категория',
                     ),
                 ),
             ],
             options={
-                "verbose_name": "статья",
-                "verbose_name_plural": "статьи",
-                "ordering": ("-created_at", "-updated_at"),
-                "get_latest_by": ("-updated_at", "-created_at"),
+                'verbose_name': 'статья',
+                'verbose_name_plural': 'статьи',
+                'ordering': ('-created_at', '-updated_at'),
+                'get_latest_by': ('-updated_at', '-created_at'),
             },
         ),
     ]

@@ -15,7 +15,7 @@ async def send_message_to_tg_channel(
     message: str,
     token: str,
     # ~ screenshot_path: str,
-    chat_id: str
+    chat_id: str,
 ) -> None:
     bot = telegram.Bot(token=token)
     await bot.send_message(

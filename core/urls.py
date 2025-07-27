@@ -13,7 +13,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path("panel/", admin.site.urls),
+    path('panel/', admin.site.urls),
     path(
         'sitemap.xml',
         sitemap,
@@ -32,4 +32,6 @@ if settings.DEBUG:
 
     urlpatterns += debug_toolbar_urls()
 
-urlpatterns += [path('', include('articles.urls'))]  # без этого "хака" debug toobar не хочет работать о_О
+urlpatterns += [
+    path('', include('articles.urls'))
+]  # без этого "хака" debug toobar не хочет работать о_О

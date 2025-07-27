@@ -24,13 +24,17 @@ class Articles(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['canonical'] = self.request.build_absolute_uri(reverse_lazy('articles:articles'))
+        context['canonical'] = self.request.build_absolute_uri(
+            reverse_lazy('articles:articles')
+        )
 
         page_number = context['page_obj'].number
         if page_number == 1:
             context['title'] = self.request.site.name
         else:
-            context['title'] = f'Страница {page_number} — {self.request.site.name}'
+            context['title'] = (
+                f'Страница {page_number} — {self.request.site.name}'
+            )
 
         return context
 
@@ -43,7 +47,9 @@ class Article(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['canonical'] = self.request.build_absolute_uri(self.get_object().get_absolute_url())
+        context['canonical'] = self.request.build_absolute_uri(
+            self.get_object().get_absolute_url()
+        )
         return context
 
 
@@ -53,9 +59,12 @@ class Category(DetailView):
     context_object_name = 'category'
 
     def get_queryset(self):
-        return super().get_queryset().annotate(
-            articles_count=Count('articles')
-        ).filter(articles_count__gt=0)
+        return (
+            super()
+            .get_queryset()
+            .annotate(articles_count=Count('articles'))
+            .filter(articles_count__gt=0)
+        )
 
     def get_object(self, queryset=None):
         if queryset is None:
