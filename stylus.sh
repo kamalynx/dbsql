@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-stylus -c -w -o assets -m assets
+stylus -c -w -o assets -m assets/style.styl

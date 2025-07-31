@@ -184,14 +184,14 @@ DISALLOWED_USER_AGENTS = (
     re.compile(r'SiteCheckerBotCrawler/[\d.]+', re.IGNORECASE),
 )
 
-STORAGES = {
-    'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
-    },
-    'staticfiles': {
-        'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
-    },
-}
+# ~ STORAGES = {
+    # ~ 'default': {
+        # ~ 'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    # ~ },
+    # ~ 'staticfiles': {
+        # ~ 'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
+    # ~ },
+# ~ }
 
 
 LOGGING = {
